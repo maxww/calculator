@@ -28,11 +28,13 @@ export default class Calculator extends React.Component {
 				".",
 				"AC"
 
-			]
+			],
+			tempview: ""
 		}
 	}
 	renderButtons() {
-		return this.state.buttons.map((val, idx) => <Button updateViewwindow={this.props.updateViewwindow} key={idx} val={val}></Button>)
+		let updateTempView = this.updateTempView.bind(this)
+		return this.state.buttons.map((val, idx) => <Button updateTempView={updateTempView} key={idx} val={val}></Button>)
 	}
 	render() {
 		return (
@@ -43,5 +45,10 @@ export default class Calculator extends React.Component {
 				</div>
 			</div>
 		)
+	}
+	updateTempView(input) {
+		let accum = this.state.tempview + input;
+		this.setState({tempview: accum})
+		this.props.updateViewwindow(accum)
 	}
 }

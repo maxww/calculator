@@ -13,6 +13,6 @@ export default class Button extends React.Component {
 		event.preventDefault();
 		const input = this.props.val;
 		console.log(this)
-		this.props.updateViewwindow(input)
+		this.props.updateTempView(input)
 	}
 }
