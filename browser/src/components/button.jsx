@@ -12,7 +12,6 @@ export default class Button extends React.Component {
 	onClickButton(event) {
 		event.preventDefault();
 		const input = this.props.val;
-		console.log(this)
 		this.props.updateTempView(input)
 	}
 }

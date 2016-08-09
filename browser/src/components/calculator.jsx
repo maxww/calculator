@@ -29,7 +29,10 @@ export default class Calculator extends React.Component {
 				"AC"
 
 			],
-			tempview: ""
+			tempview: "",
+			num1: null,
+			num2: null,
+			op: null
 		}
 	}
 	renderButtons() {
@@ -47,8 +50,40 @@ export default class Calculator extends React.Component {
 		)
 	}
 	updateTempView(input) {
-		let accum = this.state.tempview + input;
-		this.setState({tempview: accum})
-		this.props.updateViewwindow(accum)
+		let accum;
+		let num1;
+		let num2;
+		let op;
+		if (typeof input === "number" || input === ".") {
+			accum = this.state.tempview + input;
+			this.setState({tempview: accum})
+		}
+		if (typeof input === "string" && input !== ".") {
+			accum = this.state.tempview + input;
+			num1 = this.state.tempview;
+			op = input;
+			this.setState({tempview: accum, num1: num1, op: op})
+		}
+		if (input === "=") {
+			op = this.state.op;
+			num1 = parseInt(this.state.num1);
+			num2 = parseInt(this.state.tempview.split(op)[1]);
+			if (op === "+")
+				accum = num1 + num2;
+			if (op === "-")
+				accum = num1 - num2;
+			if (op === "*")
+				accum = num1 * num2;
+			if (op === "/")
+				accum = num1 / num2;
+			if (op === "%")
+				accum = num1 % num2;
+			this.setState({tempview: "", num1: accum, num2: null, op: null})
+		}
+		if (input === "AC") {
+			this.setState({tempview: "", num1: null, num2: null, op: null})
+		}
+		this.props.updateViewwindow(accum);
+
 	}
 }
