@@ -54,11 +54,21 @@ export default class Calculator extends React.Component {
 		let num1;
 		let num2;
 		let op;
+		if (input === "+/-") {
+			accum = this.state.tempview;
+			if (!accum.match(/-/)) {
+				accum = "-" + accum;
+			} else {
+				accum = accum.split("-")
+				accum.splice(0, 1)
+				accum.join()
+			}
+			this.setState({tempview: accum})
+		}
 		if (typeof input === "number" || input === ".") {
 			accum = this.state.tempview + input;
 			this.setState({tempview: accum})
-		}
-		if (typeof input === "string" && input !== ".") {
+		} else if (input.match(/[\+\-\*\/]/) !== null && input !== "+/-") {
 			accum = this.state.tempview + input;
 			num1 = this.state.tempview;
 			op = input;
@@ -66,8 +76,8 @@ export default class Calculator extends React.Component {
 		}
 		if (input === "=") {
 			op = this.state.op;
-			num1 = parseInt(this.state.num1);
-			num2 = parseInt(this.state.tempview.split(op)[1]);
+			num1 = +this.state.num1;
+			num2 = +this.state.tempview.split(op)[1];
 			if (op === "+")
 				accum = num1 + num2;
 			if (op === "-")
@@ -81,8 +91,10 @@ export default class Calculator extends React.Component {
 			this.setState({tempview: "", num1: accum, num2: null, op: null})
 		}
 		if (input === "AC") {
+			accum = ""
 			this.setState({tempview: "", num1: null, num2: null, op: null})
 		}
+
 		this.props.updateViewwindow(accum);
 
 	}
