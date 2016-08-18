@@ -4,9 +4,7 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			viewwindow: "0",
-			nums: null,
-			operator: null
+			viewwindow: "0"
 		}
 
 	}
