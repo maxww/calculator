@@ -90,11 +90,11 @@ export default class Calculator extends React.Component {
 				accum = num1 / num2;
 			if (op === "%")
 				accum = num1 % num2;
-			this.setState({tempview: "", num1: accum, num2: null, op: null})
+			this.setState({tempview: "", num1: accum, num2: null, op: null});
 		}
 		if (input === "AC") {
-			accum = ""
-			this.setState({tempview: "", num1: null, num2: null, op: null})
+			accum = "0";
+			this.setState({tempview: "", num1: null, num2: null, op: null});
 		}
 
 		this.props.updateViewwindow(accum);
