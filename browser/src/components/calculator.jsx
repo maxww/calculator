@@ -8,26 +8,26 @@ export default class Calculator extends React.Component {
 		super(props);
 		this.state = {
 			buttons: [
-				0,
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
+				"AC",
+				"+/-",
+				"%",
+				"÷",
 				7,
 				8,
 				9,
-				"+",
+				"x",
+				4,
+				5,
+				6,
 				"-",
-				"*",
-				"/",
-				"+/-",
-				"%",
-				"=",
+				1,
+				2,
+				3,
+				"+",
+				0,
+				"00",
 				".",
-				"AC"
-
+				"="
 			],
 			tempview: "",
 			num1: null,
@@ -43,7 +43,7 @@ export default class Calculator extends React.Component {
 		return (
 			<div>
 				<Viewwindow viewwindow={this.props.viewwindow}/>
-				<div>
+				<div className="numbers">
 					{this.renderButtons()}
 				</div>
 			</div>
@@ -67,10 +67,10 @@ export default class Calculator extends React.Component {
 			}
 			this.setState({tempview: accum})
 		}
-		if (typeof input === "number" || input === ".") {
+		if (typeof input === "number" || input === "." || input === "00") {
 			accum = this.state.tempview + input;
 			this.setState({tempview: accum})
-		} else if (input.match(/[\+\-\*\/]/) !== null && input !== "+/-") {
+		} else if (input.match(/[x\+\-\÷]/) !== null && input !== "+/-") {
 			accum = this.state.tempview + input;
 			num1 = this.state.tempview;
 			op = input;
@@ -84,9 +84,9 @@ export default class Calculator extends React.Component {
 				accum = num1 + num2;
 			if (op === "-")
 				accum = num1 - num2;
-			if (op === "*")
+			if (op === "x")
 				accum = num1 * num2;
-			if (op === "/")
+			if (op === "÷")
 				accum = num1 / num2;
 			if (op === "%")
 				accum = num1 % num2;

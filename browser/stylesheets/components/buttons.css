@@ -1,0 +1,13 @@
+.numbers {
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 400px;
+}
+.buttons {
+    width: 100px;
+    height: 100px;
+    font-size: 20px
+}
