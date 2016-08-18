@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import Button from './button';
 import Viewwindow from './view_window';
+// require('../../stylesheets/components/buttons.css');
 
 export default class Calculator extends React.Component {
 	constructor(props) {
@@ -24,8 +25,8 @@ export default class Calculator extends React.Component {
 				2,
 				3,
 				"+",
-				0,
 				"00",
+				0,
 				".",
 				"="
 			],

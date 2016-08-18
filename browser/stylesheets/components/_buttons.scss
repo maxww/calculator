@@ -1,5 +1,4 @@
 .numbers {
-    background-color: grey;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -7,7 +6,8 @@
     width: 400px;
 }
 .buttons {
+    background-color: gray;
     width: 100px;
     height: 100px;
-    font-size: 20px
+    font-size: 20px;
 }
