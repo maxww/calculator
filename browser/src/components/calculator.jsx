@@ -56,12 +56,14 @@ export default class Calculator extends React.Component {
 		let op;
 		if (input === "+/-") {
 			accum = this.state.tempview;
+			console.log(accum);
+
 			if (!accum.match(/-/)) {
 				accum = "-" + accum;
 			} else {
 				accum = accum.split("-")
 				accum.splice(0, 1)
-				accum.join()
+				accum = accum.join("")
 			}
 			this.setState({tempview: accum})
 		}
