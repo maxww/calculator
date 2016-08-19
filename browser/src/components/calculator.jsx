@@ -2,7 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import Button from './button';
 import Viewwindow from './view_window';
-// require('../../stylesheets/components/buttons.css');
 
 export default class Calculator extends React.Component {
 	constructor(props) {
@@ -69,29 +68,33 @@ export default class Calculator extends React.Component {
 			this.setState({tempview: accum})
 		}
 		if (typeof input === "number" || input === "." || input === "00") {
-			accum = this.state.tempview + input;
-			this.setState({tempview: accum})
+			console.log(this.state)
+			if (!this.state.op) {
+				accum = this.state.tempview + input;
+				console.log(accum)
+				num1 = +accum;
+				this.setState({tempview: accum, num1: num1})
+			} else {
+				accum = "" + input;
+				this.setState({tempview: accum, num2: input})
+			}
 		} else if (input.match(/[x\+\-\÷]/) !== null && input !== "+/-") {
-			accum = this.state.tempview + input;
-			num1 = this.state.tempview;
-			op = input;
-			this.setState({tempview: accum, num1: num1, op: op})
+			console.log("op", this.state)
+			num1 = this.state.num1;
+			accum = num1;
+			if (!this.state.op) {
+				op = input;
+				this.setState({num1: num1, op: op})
+			} else {
+				let stateUpdate = this.runCalc(input);
+				accum = stateUpdate.num1;
+				this.setState(stateUpdate);
+			}
 		}
 		if (input === "=") {
-			op = this.state.op;
-			num1 = +this.state.num1;
-			num2 = +this.state.tempview.split(op)[1];
-			if (op === "+")
-				accum = num1 + num2;
-			if (op === "-")
-				accum = num1 - num2;
-			if (op === "x")
-				accum = num1 * num2;
-			if (op === "÷")
-				accum = num1 / num2;
-			if (op === "%")
-				accum = num1 % num2;
-			this.setState({tempview: "", num1: accum, num2: null, op: null});
+			let stateUpdate = this.runCalc();
+			accum = stateUpdate.num1;
+			this.setState(stateUpdate);
 		}
 		if (input === "AC") {
 			accum = "0";
@@ -100,5 +103,27 @@ export default class Calculator extends React.Component {
 
 		this.props.updateViewwindow(accum);
 
+	}
+	runCalc(input) {
+		let op = this.state.op;
+		let num1 = +this.state.num1;
+		let num2 = +this.state.num2;
+		console.log(num1, num2)
+		let accum;
+		if (op === "+")
+			accum = num1 + num2;
+		if (op === "-")
+			accum = num1 - num2;
+		if (op === "x")
+			accum = num1 * num2;
+		if (op === "÷")
+			accum = num1 / num2;
+		if (op === "%")
+			accum = num1 % num2;
+		op = input
+			? input
+			: null
+
+		return {tempview: "", num1: accum, num2: null, op: op};
 	}
 }
