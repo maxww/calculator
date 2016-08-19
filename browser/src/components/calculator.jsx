@@ -55,8 +55,9 @@ export default class Calculator extends React.Component {
 		let num2;
 		let op;
 		if (input === "+/-") {
-			accum = this.state.tempview;
-			console.log(accum);
+			this.state.num1 !== null
+				? accum = "" + this.state.num1
+				: accum = this.state.tempview
 
 			if (!accum.match(/-/)) {
 				accum = "-" + accum;
@@ -65,10 +66,12 @@ export default class Calculator extends React.Component {
 				accum.splice(0, 1)
 				accum = accum.join("")
 			}
-			this.setState({tempview: accum})
+			this.setState({
+				tempview: accum,
+				num1: + accum
+			})
 		}
 		if (typeof input === "number" || input === "." || input === "00") {
-			console.log(this.state)
 			if (!this.state.op) {
 				accum = this.state.tempview + input;
 				console.log(accum)
@@ -78,8 +81,7 @@ export default class Calculator extends React.Component {
 				accum = "" + input;
 				this.setState({tempview: accum, num2: input})
 			}
-		} else if (input.match(/[x\+\-\÷]/) !== null && input !== "+/-") {
-			console.log("op", this.state)
+		} else if (input.match(/[x\+\-\÷\%]/) !== null && input !== "+/-") {
 			num1 = this.state.num1;
 			accum = num1;
 			if (!this.state.op) {
@@ -108,7 +110,6 @@ export default class Calculator extends React.Component {
 		let op = this.state.op;
 		let num1 = +this.state.num1;
 		let num2 = +this.state.num2;
-		console.log(num1, num2)
 		let accum;
 		if (op === "+")
 			accum = num1 + num2;
