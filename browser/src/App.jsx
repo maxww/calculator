@@ -12,12 +12,11 @@ export default class App extends React.Component {
 		let updateViewwindow = this.updateViewwindow.bind(this)
 		return (
 			<div className="row">
-				<div className="col-lg-4 col-sm-12"></div>
-				<div className="col-lg-4 col-sm-12">
-					<h4>Calculator App</h4>
+				<div className="col-lg-4 hidde-sm"></div>
+				<div className="col-lg-4 col-sm-12 calc">
 					<Calculator buttons={this.state.buttons} viewwindow={this.state.viewwindow} updateViewwindow={updateViewwindow}/>
 				</div>
-				<div className="col-lg-4 col-sm-12"></div>
+				<div className="col-lg-4 hidde-sm"></div>
 			</div>
 		)
 	}

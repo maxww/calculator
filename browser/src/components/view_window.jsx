@@ -4,7 +4,9 @@ import {render} from "react-dom";
 export default class Viewwindow extends React.Component {
 	render() {
 		return (
-			<div className="view-window">{this.props.viewwindow}</div>
+			<div className="view-window">
+				<span>{this.props.viewwindow}</span>
+			</div>
 		)
 	}
 }

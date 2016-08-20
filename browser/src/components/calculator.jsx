@@ -35,10 +35,7 @@ export default class Calculator extends React.Component {
 			op: null
 		}
 	}
-	renderButtons() {
-		let updateTempView = this.updateTempView.bind(this)
-		return this.state.buttons.map((val, idx) => <Button updateTempView={updateTempView} key={idx} val={val}></Button>)
-	}
+
 	render() {
 		return (
 			<div>
@@ -49,6 +46,12 @@ export default class Calculator extends React.Component {
 			</div>
 		)
 	}
+
+	renderButtons() {
+		let updateTempView = this.updateTempView.bind(this)
+		return this.state.buttons.map((val, idx) => <Button updateTempView={updateTempView} key={idx} val={val}></Button>)
+	}
+
 	updateTempView(input) {
 		let accum;
 		let num1;
