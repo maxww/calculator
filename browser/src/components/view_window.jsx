@@ -11,36 +11,9 @@ export default class Viewwindow extends React.Component {
 
 	render() {
 		return (
-			<div className="view-window" onClick={this.onAnswerClick.bind(this)}>
-				{this.renderViewWindow()}
+			<div className="view-window" >
+				<span>{this.props.viewwindow}</span>
 			</div>
 		)
-	}
-
-	renderViewWindow(){
-		if (this.state.isAnswering){
-			return (
-				<form onSubmit={this.onAnswerUpdateViewWindow()}>
-					<input type="text" ref="answerInput"/>
-				</form>
-			)
-		}
-
-		return (
-			<span>{this.props.viewwindow}</span>
-		)
-	}
-
-	onAnswerClick(){
-		this.setState({isAnswering: true});
-	}
-
-	onAnswerUpdateViewWindow(){
-		event.preventDefault();
-		if (this.refs.answerInput){
-			const answer = this.refs.answerInput.value;
-			this.props.updateViewwindow(answer);
-			this.setState({isAnswering: false})
-		}
 	}
 }

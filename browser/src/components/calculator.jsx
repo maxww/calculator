@@ -10,7 +10,8 @@ export default class Calculator extends React.Component {
             tempview: "",
             num1: null,
             num2: null,
-            op: null
+            op: null,
+            equal: null
         }
     }
 
@@ -68,8 +69,7 @@ export default class Calculator extends React.Component {
                 this.setState({num1: num1, op: op})
             } else {
                 let stateUpdate = this.runCalc(input);
-                accum = "what is the answer?"
-                // accum = stateUpdate.num1;
+                accum = stateUpdate.num1;
                 this.setState(stateUpdate);
             }
         } else if (input === "%") {
@@ -78,9 +78,17 @@ export default class Calculator extends React.Component {
             this.setState({tempview: "", num1: num1})
         }
         if (input === "=") {
-            let stateUpdate = this.runCalc();
-            accum = stateUpdate.num1;
-            this.setState(stateUpdate);
+            console.log(this.state)
+            if (this.state.equal === "="){
+                let stateUpdate = this.runCalc();
+                accum = stateUpdate.num1;
+                this.setState(stateUpdate);
+            } else if (!this.state.equal && this.state.op){
+                accum = "what is the answer?"
+                this.setState({equal: input})
+            } else {
+                accum = this.state.num1;
+            }
         }
         if (input === "AC") {
             accum = "0";
@@ -104,6 +112,6 @@ export default class Calculator extends React.Component {
         op = input
             ? input
             : null
-        return {tempview: "", num1: accum, num2: null, op: op};
+        return {tempview: "", num1: accum, num2: null, op: op, equal: null};
     }
 }
